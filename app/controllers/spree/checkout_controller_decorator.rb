@@ -403,7 +403,8 @@ module Spree
       end
 
       # suggest current user's email or any email stored in the order
-      opts[:email] = spree_current_user ? spree_current_user.email : order.email
+      # GT not the one on the order because it will only be a made-up guest one
+      opts[:email] = spree_current_user ? spree_current_user.email : nil
       if order.bill_address.present?
         opts[:address_override] = 1
         opts[:address] = {
