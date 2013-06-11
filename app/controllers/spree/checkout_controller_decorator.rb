@@ -80,17 +80,18 @@ module Spree
 
         unless payment_method.preferred_no_shipping
           ship_address = @ppx_details.address
+          country = Spree::Country.find_by_iso(ship_address["country"])
           order_ship_address = Spree::Address.new :firstname  => @ppx_details.params["first_name"],
                                                   :lastname   => @ppx_details.params["last_name"],
                                                   :address1   => ship_address["address1"],
                                                   :address2   => ship_address["address2"],
                                                   :city       => ship_address["city"],
-                                                  :country    => Spree::Country.find_by_iso(ship_address["country"]),
+                                                  :country    => country,
                                                   :zipcode    => ship_address["zip"],
                                                   # phone is currently blanked in AM's PPX response lib
                                                   :phone      => @ppx_details.params["phone"] || "(not given)"
 
-          state = Spree::State.find_by_abbr(ship_address["state"].upcase) if ship_address["state"].present?
+          state = country.states.find_by_abbr(ship_address["state"].upcase) if ship_address["state"].present?
           if state
             order_ship_address.state = state
           else
