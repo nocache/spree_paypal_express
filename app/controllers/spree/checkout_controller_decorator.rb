@@ -108,13 +108,20 @@ module Spree
           end
 
         end
+        @order.email = @ppx_details.params["payer"]
         @order.state = "payment"
         @order.save
 
         if payment_method.preferred_review
 
           @order.next
-          render 'spree/shared/paypal_express_confirm'
+          @continue_url = paypal_finish_order_checkout_url(@order, {
+                 :token => params[:token],
+                 :PayerID => params[:PayerID],
+                 :payment_method_id => params[:payment_method_id]
+                 } )
+
+          render 'spree/checkout/edit'
         else
           paypal_finish
         end
