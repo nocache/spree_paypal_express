@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_paypal_express'
-  s.version     = '1.4.0'
+  s.version     = '1.4.1'
   s.summary     = 'Adds PayPal Express as a Payment Method to Spree store'
   s.homepage    = 'http://www.spreecommerce.com'
   s.author      = 'Spree Commerce'
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.has_rdoc      = false
 
-  s.add_dependency 'spree_core', '~> 1.3.0'
+  s.add_dependency 'spree_core', '~> 1.3.3'
 
   s.add_development_dependency 'capybara', '~> 1.1.3'
   s.add_development_dependency 'coffee-rails'
