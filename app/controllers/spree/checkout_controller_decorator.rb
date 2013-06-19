@@ -110,6 +110,7 @@ module Spree
         end
         @order.email = @ppx_details.params["payer"]
         @order.state = "payment"
+        debugger
         @order.save
 
         if payment_method.preferred_review
@@ -183,7 +184,7 @@ module Spree
         end
 
         @order.finalize!
-        flash[:notice] = I18n.t(:order_processed_successfully)
+        flash[:order_state] = I18n.t(:order_processed_successfully)
         flash[:commerce_tracking] = "true"
         redirect_to completion_route
       else
