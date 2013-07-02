@@ -110,7 +110,6 @@ module Spree
         end
         @order.email = @ppx_details.params["payer"]
         @order.state = "payment"
-        debugger
         @order.save
 
         if payment_method.preferred_review
